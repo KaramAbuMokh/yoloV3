@@ -1,8 +1,10 @@
-import cv2
-import numpy as np
-
 from Parameters import *
 
+
+try:
+    import numpy as np
+except ImportError:
+    print('\nnumpy is uninstalled')
 
 def in_labels(max_label):
     if labels[max_label] in wanted_labels:
@@ -37,7 +39,7 @@ def get_boxes(model_output, w, h):
     return boxes_to_draw, xnms(boxes_to_draw)
 
 
-import numpy as np
+
 
 
 def nms(boxes, probs=None, overlapThresh=0.3):

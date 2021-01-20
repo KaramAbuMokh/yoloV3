@@ -1,4 +1,7 @@
-import cv2
+try:
+    import cv2
+except ImportError:
+    print('\nOpenCV-python is uninstalled')
 
 
 def read_image(image_path):

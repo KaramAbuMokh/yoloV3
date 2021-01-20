@@ -1,6 +1,28 @@
-import os
-import shutil
-import subprocess
+
+try:
+    import cv2
+except ImportError:
+    print('\nOpenCV-python is uninstalled')
+
+try:
+    import os
+except ImportError:
+    print('\nos is uninstalled')
+
+try:
+    import shutil
+except ImportError:
+    print('\nshutil is uninstalled')
+
+try:
+    import subprocess
+except ImportError:
+    print('\nsubprocess is uninstalled')
+
+try:
+    import urllib.request
+except ImportError:
+    print('\nurllib.request is uninstalled')
 
 from LoadModel import *
 from ModelOutptProcessing import *
@@ -27,6 +49,10 @@ def clean_frames_folder():
 
 if __name__ == '__main__':
 
+    # download weights file
+    url = 'https://pjreddie.com/media/files/yolov3.weights'
+    urllib.request.urlretrieve(url, 'w.weights')
+
     '''
 
     model = load_model('config.cfg', 'w.weights')
@@ -45,9 +71,11 @@ if __name__ == '__main__':
     '''
 
     # -------------------- video ---------------------
-    os.mkdir('frames')  # to save frames extracted from video
-    os.mkdir("stream")  # to save video made from frames with boxes
-
+    try:
+        os.mkdir('frames')  # to save frames extracted from video
+        # os.mkdir("stream")  # to save video made from frames with boxes
+    except:
+        print('didnt made the frames directory')
     # load model using the files w.weights and config.cfg
     model = load_model('config.cfg', 'w.weights')
     w, h, output, frames = predict_vid('vid.mp4', model)

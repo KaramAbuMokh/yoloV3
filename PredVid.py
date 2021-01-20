@@ -1,5 +1,12 @@
-import cv2
-import imutils
+try:
+    import cv2
+except ImportError:
+    print('\nOpenCV-python is uninstalled')
+
+try:
+    import imutils
+except ImportError:
+    print('\nimutils is uninstalled')
 
 def predict_vid(vid_path,model):
     '''
